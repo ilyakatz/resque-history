@@ -1,0 +1,15 @@
+<h1 class='wi'>Job history</h1>
+<p class='intro'>Below is a list of recently executed jobs</p>
+<table class='queues1'>
+  <tr>
+    <th>Name</th>
+    <th>Paused</th>
+    <th>Jobs</th>
+  </tr>
+  <% for history in Resque.redis.lrange(history,0,-1) { |q| q.to_s } %>
+  <tr>
+    <td class='queue'><%= history["class"] %></td>
+    <td class='args'><%= history["args"] %></td>
+  </tr>
+  <% end %>
+</table>
