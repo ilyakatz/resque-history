@@ -26,7 +26,7 @@ module ResqueHistory
       end
     end
 
-    Resque::Server.tabs << 'Pause'
+    Resque::Server.tabs << 'History'
   end
 end
 
