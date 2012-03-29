@@ -1,53 +1,25 @@
-# encoding: utf-8
-
-require 'rubygems'
 require 'bundler'
+Bundler::GemHelper.install_tasks
+
+require "rspec/core/rake_task"
+
+desc "Run all examples"
+RSpec::Core::RakeTask.new(:spec)
+
+task :default => :spec
+
+
 begin
-  Bundler.setup(:default, :development)
-rescue Bundler::BundlerError => e
-  $stderr.puts e.message
-  $stderr.puts "Run `bundle install` to install missing gems"
-  exit e.status_code
-end
-require 'rake'
-
-require 'jeweler'
-Jeweler::Tasks.new do |gem|
-  # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
-  gem.name = "resque-history"
-  gem.homepage = "http://github.com/ilyakatz/resque-history"
-  gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
-  gem.email = "ilyakatz@gmail.com"
-  gem.authors = ["Ilya Katz"]
-  # dependencies defined in Gemfile
-end
-Jeweler::RubygemsDotOrgTasks.new
-
-require 'rake/testtask'
-Rake::TestTask.new(:test) do |test|
-  test.libs << 'lib' << 'test'
-  test.pattern = 'test/**/test_*.rb'
-  test.verbose = true
-end
-
-require 'rcov/rcovtask'
-Rcov::RcovTask.new do |test|
-  test.libs << 'test'
-  test.pattern = 'test/**/test_*.rb'
-  test.verbose = true
-  test.rcov_opts << '--exclude "gems/*"'
-end
-
-task :default => :test
-
-require 'rake/rdoctask'
-Rake::RDocTask.new do |rdoc|
-  version = File.exist?('VERSION') ? File.read('VERSION') : ""
-
-  rdoc.rdoc_dir = 'rdoc'
-  rdoc.title = "resque-history #{version}"
-  rdoc.rdoc_files.include('README*')
-  rdoc.rdoc_files.include('lib/**/*.rb')
+  require 'jeweler'
+  Jeweler::Tasks.new do |gem|
+    gem.name = "resque-history"
+    gem.summary = %Q{Show history of recently executed jobs}
+    gem.description = %Q{Show history of recently executed jobs}
+    gem.email = "ilyakatz@gmail.com"
+    gem.homepage = "https://github.com/ilyakatz/resque-history"
+    gem.authors = ["Katzmopolitan"]
+  end
+  Jeweler::GemcutterTasks.new
+rescue LoadError
+  puts "Jeweler (or a dependency) not available. Install it with: gem install   jeweler"
 end
