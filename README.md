@@ -75,6 +75,8 @@ Install
 =======
 
     $ gem install resque-pause
+    
+Add to routes.rb file
 
+    require 'resque-history/server'
 [rq]: http://github.com/defunkt/resque
-[resque-pause]: https://github.com/wandenberg/resque-pause
