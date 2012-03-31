@@ -1,6 +1,6 @@
 # Resque Pause [![alt build status][1]][2]
 
-[1]: http://secure.travis-ci.org/ilyakatz/resque-history.png?branch=master
+[1]: https://secure.travis-ci.org/ilyakatz/resque-history.png?branch=master
 [2]: http://travis-ci.org/#!/ilyakatz/resque-history
 
 
