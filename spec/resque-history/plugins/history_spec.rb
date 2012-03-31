@@ -8,9 +8,9 @@ class HistoryJob
   end
 end
 
-describe Resque::Plugins::Pause do
+describe Resque::Plugins::History do
   it "should be compliance with Resqu::Plugin document" do
-    expect { Resque::Plugin.lint(Resque::Plugins::Pause) }.to_not raise_error
+    expect { Resque::Plugin.lint(Resque::Plugins::History) }.to_not raise_error
   end
 
   it "should store history of the job" do
