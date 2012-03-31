@@ -4,6 +4,7 @@ source "http://rubygems.org"
 gemspec
 
 gem "rake"
+gem "resque"
 
 group :test, :development do
   gem "bundler"

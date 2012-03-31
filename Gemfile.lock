@@ -1,10 +1,10 @@
 PATH
   remote: .
   specs:
-    resque-history (0.1.1)
+    resque-history (1.0.0)
       rake
-      redis (>= 2.0.1)
-      resque (>= 1.19.0)
+      resque
+      resque-history
 
 GEM
   remote: http://rubygems.org/
@@ -98,5 +98,6 @@ DEPENDENCIES
   bundler
   jeweler (~> 1.6.4)
   rake
+  resque
   resque-history!
   rspec-rails

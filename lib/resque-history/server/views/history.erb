@@ -4,12 +4,14 @@
   <tr>
     <th>Job</th>
     <th>Arguments</th>
+    <th>Time</th>
   </tr>
   <% Resque.redis.lrange(Resque::Plugins::History::HISTORY_SET_NAME, 0, -1).each do |history| %>
       <% j = JSON.parse(history) %>
       <tr>
         <td class='queue'><%= j["class"] %></td>
         <td class='args'><%= j["args"] %></td>
+        <td class='args'><%= j["time"] %></td>
       </tr>
   <% end %>
 </table>
