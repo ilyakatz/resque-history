@@ -2,14 +2,14 @@
 <p class='intro'>Below is a list of recently executed jobs</p>
 <table class='queues1'>
   <tr>
-    <th>Name</th>
-    <th>Paused</th>
-    <th>Jobs</th>
+    <th>Job</th>
+    <th>Arguments</th>
   </tr>
-  <% for history in Resque.redis.lrange(history,0,-1) { |q| q.to_s } %>
-  <tr>
-    <td class='queue'><%= history["class"] %></td>
-    <td class='args'><%= history["args"] %></td>
-  </tr>
+  <% Resque.redis.lrange(Resque::Plugins::History::HISTORY_SET_NAME, 0, -1).each do |history| %>
+      <% j = JSON.parse(history) %>
+      <tr>
+        <td class='queue'><%= j["class"] %></td>
+        <td class='args'><%= j["args"] %></td>
+      </tr>
   <% end %>
 </table>
