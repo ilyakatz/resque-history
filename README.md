@@ -1,4 +1,4 @@
-# Resque Pause [![alt build status][1]][2]
+# Resque History [![alt build status][1]][2]
 
 [1]: https://secure.travis-ci.org/ilyakatz/resque-history.png?branch=master
 [2]: http://travis-ci.org/#!/ilyakatz/resque-history
@@ -29,7 +29,7 @@ Usage / Examples
 Resque-Web integration
 ----------------------
 
-You have to load ResquePause to enable the Pause tab.
+You have to load Resquehistory to enable the History tab.
 
 ```ruby
     require 'resque-pause/server'
