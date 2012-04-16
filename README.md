@@ -29,10 +29,10 @@ Usage / Examples
 Resque-Web integration
 ----------------------
 
-You have to load Resquehistory to enable the History tab.
+You have to load ResqueHistory to enable the History tab.
 
 ```ruby
-    require 'resque-pause/server'
+    require 'resque-history/server'
 ```
 
 Install
