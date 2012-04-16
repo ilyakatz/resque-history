@@ -1,12 +1,19 @@
+<% size = Resque.redis.llen(Resque::Plugins::History::HISTORY_SET_NAME) %>
+<% start = params[:start].to_i %>
+<% history = Resque.redis.lrange(Resque::Plugins::History::HISTORY_SET_NAME, start, start + 20)%>
+
 <h1 class='wi'>Job history</h1>
-<p class='intro'>Below is a list of recently executed jobs</p>
+<p class='intro'>Showing <%=start%> to <%= start + 20 %> of <b><%= size = Resque.redis.llen(Resque::Plugins::History::HISTORY_SET_NAME) %></b> jobs</p>
+
+<%= partial :next_more, :start => params[:start].to_i, :size => size %>
+
 <table class='queues1'>
   <tr>
     <th>Job</th>
     <th>Arguments</th>
     <th>Time</th>
   </tr>
-  <% Resque.redis.lrange(Resque::Plugins::History::HISTORY_SET_NAME, 0, -1).each do |history| %>
+  <% history.each do |history| %>
       <% j = JSON.parse(history) %>
       <tr>
         <td class='queue'><%= j["class"] %></td>
@@ -15,3 +22,5 @@
       </tr>
   <% end %>
 </table>
+
+<%= partial :next_more, :start => start, :size => size %>
