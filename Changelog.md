@@ -1,7 +1,13 @@
 Changelog
 =========
 
-### 1.6.0 (April 16, 2012)
+## 1.7.0 (April 17, 2012)
+
+Features:
+
+  - Added button to clear history
+
+### 1.6.1 (April 16, 2012)
 
 Bug fixes
 
