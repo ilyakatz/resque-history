@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe ResqueHistory::Server do
   include Rack::Test::Methods
+
   def app
     @app ||= Resque::Server.new
   end
@@ -19,6 +20,11 @@ describe ResqueHistory::Server do
   it "should respond to /history" do
     get '/history'
     last_response.should be_ok
+  end
+
+  it "should respond to remove history" do
+    post "/history/clear"
+    last_response.should be_redirect
   end
 
 end

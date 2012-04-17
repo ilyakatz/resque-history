@@ -23,10 +23,25 @@ module ResqueHistory
           erb File.read(ResqueHistory::Server.erb_path('history.erb'))
         end
 
+        post "/history/clear" do
+          Resque.reset_history
+          redirect u('history')
+        end
+
       end
     end
 
     Resque::Server.tabs << 'History'
+  end
+
+  # Clears all historical jobs
+  def reset_history
+    size = redis.llen(Resque::Plugins::History::HISTORY_SET_NAME)
+
+    size.times do
+      redis.lpop(Resque::Plugins::History::HISTORY_SET_NAME)
+    end
+
   end
 end
 

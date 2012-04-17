@@ -78,4 +78,27 @@ describe Resque::Plugins::History do
 
   end
 
+  it "should allow to remove history" do
+
+    Resque.enqueue(HistoryJob, 15)
+    Resque.enqueue(HistoryJob, 13)
+
+    job = Resque.reserve('test')
+    job.perform
+    job = Resque.reserve('test')
+    job.perform
+
+    arr = Resque.redis.lrange(Resque::Plugins::History::HISTORY_SET_NAME, 0, -1)
+
+    arr.count.should == 2
+
+    Resque.reset_history
+
+
+    arr = Resque.redis.lrange(Resque::Plugins::History::HISTORY_SET_NAME, 0, -1)
+
+    arr.count.should == 0
+
+  end
+
 end
