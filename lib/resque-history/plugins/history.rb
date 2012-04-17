@@ -6,7 +6,7 @@ module Resque
       HISTORY_SET_NAME = "resque_history"
 
       def maximum_history_size
-        @max_hisory ||=MAX_HISTORY_SIZE
+        @max_history ||= MAX_HISTORY_SIZE
       end
 
       def after_perform_history(*args)

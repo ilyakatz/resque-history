@@ -26,6 +26,26 @@ Usage / Examples
     end
 ```
 
+
+### Job History
+
+By default resque-history stores 500 history items on redis, 
+but if you want to store less items, assign @max_history in the job class.
+
+```ruby
+    require 'resque-history'
+
+    class UpdateNetworkGraph
+      extend Resque::Plugins::History
+      @queue = :network_graph
+      @max_history = 50 # max number of histories to be kept
+
+      def self.perform(some_id)
+        do_stuff(some_id)
+      end
+    end
+```
+
 Resque-Web integration
 ----------------------
 

@@ -9,6 +9,16 @@ class HistoryJob
   end
 end
 
+class MaxHistoryJob
+  extend Resque::Plugins::History
+  @queue = :test2
+  @max_history = 15
+
+  def self.perform(*args)
+  end
+end
+
+
 describe Resque::Plugins::History do
   it "should be compliance with Resqu::Plugin document" do
     expect { Resque::Plugin.lint(Resque::Plugins::History) }.to_not raise_error
@@ -27,6 +37,11 @@ describe Resque::Plugins::History do
       JSON.parse(arr.first).should == {"class"=>"HistoryJob", "args"=>[12], "time"=>"2000-09-01 12:00"}
     end
   end
+
+  it "should use the max_history size of the history list" do
+    MaxHistoryJob.maximum_history_size.should == 15
+  end
+
 
   it "should set the default size of the history list to be 500" do
     HistoryJob.maximum_history_size.should == 500
