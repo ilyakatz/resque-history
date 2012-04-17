@@ -7,9 +7,5 @@ gem "rake"
 gem "resque"
 
 group :test, :development do
-  gem "bundler"
-  gem "jeweler", "~> 1.6.4"
-  gem "rspec-rails"
-  gem "timecop"
 end
 
