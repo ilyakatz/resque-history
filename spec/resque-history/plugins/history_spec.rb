@@ -70,9 +70,9 @@ describe Resque::Plugins::History do
 
       arr.count.should == 3
       arr.should == [
-          {"class"=>"HistoryJob", "args"=>[13], "time"=>"2000-09-01 12:00"},
+          {"class"=>"HistoryJob", "args"=>[11], "time"=>"2000-09-01 12:00"},
           {"class"=>"HistoryJob", "args"=>[12], "time"=>"2000-09-01 12:00"},
-          {"class"=>"HistoryJob", "args"=>[11], "time"=>"2000-09-01 12:00"}
+          {"class"=>"HistoryJob", "args"=>[13], "time"=>"2000-09-01 12:00"}
       ].collect(&:to_json)
     end
 
