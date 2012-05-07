@@ -6,6 +6,7 @@ require 'resque/server'
 module ResqueHistory
   module Server
     include Resque::Helpers
+    include Resque::History::Helper
 
     def self.erb_path(filename)
       File.join(File.dirname(__FILE__), 'server', 'views', filename)

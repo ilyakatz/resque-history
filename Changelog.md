@@ -1,6 +1,12 @@
 Changelog
 =========
 
+## 1.7.0 (May 7, 2012)
+
+Features:
+
+  - Record execution time
+
 ## 1.7.0 (April 17, 2012)
 
 Features:

@@ -19,6 +19,7 @@
     <th>Job</th>
     <th>Arguments</th>
     <th>Time</th>
+    <th>Execution</th>
   </tr>
   <% history.each do |history| %>
       <% j = JSON.parse(history) %>
@@ -26,6 +27,7 @@
         <td class='queue'><%= j["class"] %></td>
         <td class='args'><%= j["args"] %></td>
         <td class='args'><%= j["time"] %></td>
+        <td class='args'><%= format_execution(j["execution"]) %></td>
       </tr>
   <% end %>
 </table>

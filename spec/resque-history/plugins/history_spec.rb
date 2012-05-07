@@ -18,7 +18,6 @@ class MaxHistoryJob
   end
 end
 
-
 describe Resque::Plugins::History do
   it "should be compliance with Resqu::Plugin document" do
     expect { Resque::Plugin.lint(Resque::Plugins::History) }.to_not raise_error
@@ -34,7 +33,7 @@ describe Resque::Plugins::History do
       arr = Resque.redis.lrange(Resque::Plugins::History::HISTORY_SET_NAME, 0, -1)
 
       arr.count.should == 1
-      JSON.parse(arr.first).should == {"class"=>"HistoryJob", "args"=>[12], "time"=>"2000-09-01 12:00"}
+      JSON.parse(arr.first).should == {"class"=>"HistoryJob", "args"=>[12], "time"=>"2000-09-01 12:00", "execution"=>0}
     end
   end
 
@@ -70,9 +69,9 @@ describe Resque::Plugins::History do
 
       arr.count.should == 3
       arr.should == [
-          {"class"=>"HistoryJob", "args"=>[11], "time"=>"2000-09-01 12:00"},
-          {"class"=>"HistoryJob", "args"=>[12], "time"=>"2000-09-01 12:00"},
-          {"class"=>"HistoryJob", "args"=>[13], "time"=>"2000-09-01 12:00"}
+          {"class"=>"HistoryJob", "args"=>[11], "time"=>"2000-09-01 12:00", "execution"=>0},
+          {"class"=>"HistoryJob", "args"=>[12], "time"=>"2000-09-01 12:00", "execution"=>0},
+          {"class"=>"HistoryJob", "args"=>[13], "time"=>"2000-09-01 12:00", "execution"=>0}
       ].collect(&:to_json)
     end
 
@@ -101,4 +100,60 @@ describe Resque::Plugins::History do
 
   end
 
+
+  describe "record execution time" do
+
+    it "should record execution time" do
+
+      Resque.enqueue(SlowHistoryJob, 10)
+
+      Timecop.freeze(Time.local(2000, 9, 1, 12, 0, 0)) do
+        job = Resque.reserve('test')
+        job.perform
+      end
+
+      arr = Resque.redis.lrange(Resque::Plugins::History::HISTORY_SET_NAME, 0, -1)
+
+      arr.count.should == 1
+      arr.should == [
+          {"class"=>"SlowHistoryJob", "args"=>[10], "time"=>"2000-09-01 12:10", "execution"=>600}
+      ].collect(&:to_json)
+
+    end
+
+    it "should not confuse different job times" do
+
+      Resque.enqueue(SlowHistoryJob, 10)
+      Resque.enqueue(SlowHistoryJob, 5)
+
+      Timecop.freeze(Time.local(2000, 9, 1, 12, 0, 0)) do
+        job = Resque.reserve('test')
+        job.perform
+
+        job = Resque.reserve('test')
+        job.perform
+
+      end
+
+      arr = Resque.redis.lrange(Resque::Plugins::History::HISTORY_SET_NAME, 0, -1)
+
+      arr.count.should == 2
+      arr.should == [
+          {"class"=>"SlowHistoryJob", "args"=>[5], "time"=>"2000-09-01 12:15", "execution"=>300},
+          {"class"=>"SlowHistoryJob", "args"=>[10], "time"=>"2000-09-01 12:10", "execution"=>600}
+      ].collect(&:to_json)
+
+    end
+
+  end
+
+end
+
+class SlowHistoryJob
+  extend Resque::Plugins::History
+  @queue = :test
+
+  def self.perform(time_in_minutes)
+    Timecop.travel(Time.now + 60*time_in_minutes)
+  end
 end

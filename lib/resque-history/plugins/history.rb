@@ -9,10 +9,16 @@ module Resque
         @max_history ||= MAX_HISTORY_SIZE
       end
 
+      def before_perform_hsitory(*args)
+        @start_time = Time.now
+      end
+
       def after_perform_history(*args)
+        elapsed_seconds = (Time.now - @start_time).to_i
         Resque.redis.lpush(HISTORY_SET_NAME, {"class"=>"#{self}",
                                               "args"=>args,
-                                              "time"=>Time.now.strftime("%Y-%m-%d %H:%M")
+                                              "time"=>Time.now.strftime("%Y-%m-%d %H:%M"),
+                                              "execution"=>elapsed_seconds
         }.to_json)
 
         if Resque.redis.llen(HISTORY_SET_NAME) > maximum_history_size
