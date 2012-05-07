@@ -2,7 +2,7 @@ module Resque
   module History
     module Helper
 
-      def self.format_execution(seconds)
+      def format_execution(seconds)
         if seconds.nil?
           ""
         elsif seconds < 60

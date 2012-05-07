@@ -15,6 +15,9 @@ describe ResqueHistory::Server do
 
   before do
     queues
+    Resque.enqueue(HistoryJob, 12)
+    job = Resque.reserve('test')
+    job.perform
   end
 
   it "should respond to /history" do
@@ -27,4 +30,12 @@ describe ResqueHistory::Server do
     last_response.should be_redirect
   end
 
+end
+
+class HistoryJob
+  extend Resque::Plugins::History
+  @queue = :test
+
+  def self.perform(*args)
+  end
 end
