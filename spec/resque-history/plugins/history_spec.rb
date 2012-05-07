@@ -145,6 +145,32 @@ describe Resque::Plugins::History do
 
     end
 
+    it "should record times in the order of completion not in order of starting" do
+
+      #start the longer job first but it should finish last
+      Resque.enqueue(SleepyHistoryJob, 3)
+      Resque.enqueue(SleepyHistoryJob, 1)
+
+      job = Resque.reserve('test')
+      job.perform
+
+      job = Resque.reserve('test')
+      job.perform
+
+      arr = Resque.redis.lrange(Resque::Plugins::History::HISTORY_SET_NAME, 0, -1)
+
+
+      JSON.parse(arr.first)["class"].should =="SleepyHistoryJob"
+      JSON.parse(arr.first)["args"].should ==[1]
+      JSON.parse(arr.first)["execution"].should ==1
+
+
+      JSON.parse(arr.last)["class"].should =="SleepyHistoryJob"
+      JSON.parse(arr.last)["args"].should ==[3]
+      JSON.parse(arr.last)["execution"].should ==3
+
+    end
+
   end
 
 end
@@ -155,5 +181,14 @@ class SlowHistoryJob
 
   def self.perform(time_in_minutes)
     Timecop.travel(Time.now + 60*time_in_minutes)
+  end
+end
+
+class SleepyHistoryJob
+  extend Resque::Plugins::History
+  @queue = :test
+
+  def self.perform(time_in_seconds)
+    sleep(time_in_seconds)
   end
 end
