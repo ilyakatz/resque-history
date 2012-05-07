@@ -58,7 +58,9 @@ You have to load ResqueHistory to enable the History tab.
 Install
 =======
 
-    $ gem install resque-pause
+Add to your Gemfile
+
+    $ gem "resque-history"
     
 Add to routes.rb file
 
