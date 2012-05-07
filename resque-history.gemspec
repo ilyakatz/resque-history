@@ -33,7 +33,7 @@ Gem::Specification.new do |s|
     "VERSION",
     "lib/resque-history.rb",
     "lib/resque-history/plugins/history.rb",
-    "lib/resque-history/plugins/resque_history_helper.rb",
+    "lib/resque-history/plugins/helper.rb",
     "lib/resque-history/server.rb",
     "lib/resque-history/server/views/history.erb",
     "lib/resque-history/server/views/next_more.erb",

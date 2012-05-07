@@ -1,5 +1,6 @@
 require 'resque'
 require 'resque/server'
+require 'resque-history'
 
 # Extends Resque Web Based UI.
 # Structure has been borrowed from ResqueScheduler.
