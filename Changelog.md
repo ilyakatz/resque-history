@@ -1,7 +1,13 @@
 Changelog
 =========
 
-## 1.7.0 (May 7, 2012)
+## 1.9.0 (May 9, 2012)
+
+Features:
+
+  - Record failed jobs
+
+## 1.8.2 (May 7, 2012)
 
 Features:
 
