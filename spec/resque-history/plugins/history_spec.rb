@@ -19,6 +19,7 @@ class MaxHistoryJob
 end
 
 describe Resque::Plugins::History do
+
   it "should be compliance with Resqu::Plugin document" do
     expect { Resque::Plugin.lint(Resque::Plugins::History) }.to_not raise_error
   end
@@ -171,6 +172,24 @@ describe Resque::Plugins::History do
 
     end
 
+    it "should record failed jobs" do
+
+      Resque.enqueue(ExceptionJob,"nothing")
+
+      job = Resque.reserve('test')
+
+      lambda { job.perform }.should raise_exception
+      arr = Resque.redis.lrange(Resque::Plugins::History::HISTORY_SET_NAME, 0, -1)
+
+
+      arr.count.should == 1
+
+      JSON.parse(arr.first)["class"].should =="ExceptionJob"
+      JSON.parse(arr.first)["args"].should == ["nothing"]
+      JSON.parse(arr.first)["execution"].should == nil
+      JSON.parse(arr.first)["error"].should == "I'm an error"
+    end
+
   end
 
 end
@@ -190,5 +209,14 @@ class SleepyHistoryJob
 
   def self.perform(time_in_seconds)
     sleep(time_in_seconds)
+  end
+end
+
+class ExceptionJob
+  extend Resque::Plugins::History
+  @queue = :test
+
+  def self.perform(arg)
+    raise StandardError, "I'm an error"
   end
 end

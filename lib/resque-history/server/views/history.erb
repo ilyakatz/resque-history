@@ -11,25 +11,39 @@
 <% end %>
 
 <p class='intro'>Showing <%=start%> to <%= start + 20 %> of <b><%= size = Resque.redis.llen(Resque::Plugins::History::HISTORY_SET_NAME) %></b> jobs</p>
+<div id="main">
+  <%= partial :next_more, :start => params[:start].to_i, :size => size %>
 
-<%= partial :next_more, :start => params[:start].to_i, :size => size %>
+  <table>
+    <tr>
+      <th>Job</th>
+      <th>Arguments</th>
+      <th>Time</th>
+      <th>Execution</th>
+    </tr>
+    <% history.each do |history| %>
+        <% j = JSON.parse(history) %>
+        <tr class='<%= j["error"].nil? ? "" : "failure" %>' >
+          <td class='queue'><%= j["class"] %></td>
+          <td class='args'><%= j["args"] %></td>
+          <td class='args'><%= j["time"] %></td>
+          <td class='args'><%= format_execution(j["execution"]) %></td>
+        </tr>
+    <% end %>
+  </table>
 
-<table class='queues1'>
-  <tr>
-    <th>Job</th>
-    <th>Arguments</th>
-    <th>Time</th>
-    <th>Execution</th>
-  </tr>
-  <% history.each do |history| %>
-      <% j = JSON.parse(history) %>
-      <tr>
-        <td class='queue'><%= j["class"] %></td>
-        <td class='args'><%= j["args"] %></td>
-        <td class='args'><%= j["time"] %></td>
-        <td class='args'><%= format_execution(j["execution"]) %></td>
-      </tr>
-  <% end %>
-</table>
+  <%= partial :next_more, :start => start, :size => size %>
+</div>
 
-<%= partial :next_more, :start => start, :size => size %>
+<style type="text/css">
+    #main table tr.failure td {
+        background: #ffecec;
+        border-top: 2px solid #d37474;
+        font-size: 90%;
+        color: #d37474;
+    }
+
+    #main table tr.failure td a {
+        color: #d37474;
+    }
+</style>
