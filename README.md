@@ -49,13 +49,14 @@ but if you want to store less items, assign @max_history in the job class.
 Resque-Web integration
 ----------------------
 
-You have to load ResqueHistory to enable the History tab.
+![Resque History GUI](https://img.skitch.com/20120510-x4egbeih39bb2xe82c2mtapmp9.jpg)
+
+Add the following in config/routes.rb
 
 ```ruby
     require 'resque-history/server'
 ```
 
-![Resque History GUI](https://img.skitch.com/20120510-x4egbeih39bb2xe82c2mtapmp9.jpg)
 
 Install
 =======
