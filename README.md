@@ -55,6 +55,8 @@ You have to load ResqueHistory to enable the History tab.
     require 'resque-history/server'
 ```
 
+![Resque History GUI](https://img.skitch.com/20120510-x4egbeih39bb2xe82c2mtapmp9.jpg)
+
 Install
 =======
 
