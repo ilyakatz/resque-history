@@ -6,8 +6,8 @@
 
 <% if size > 0 %>
   <form method="POST" action="<%=u 'history/clear'%>" class='clear-delayed'>
-    <input type='submit' name='' value='Clear History' />
-  </form>
+  <input type='submit' name='' value='Clear History' />
+</form>
 <% end %>
 
 <p class='intro'>Showing <%=start%> to <%= start + 20 %> of <b><%= size = Resque.redis.llen(Resque::Plugins::History::HISTORY_SET_NAME) %></b> jobs</p>
@@ -21,29 +21,29 @@
       <th>Time</th>
       <th>Execution</th>
     </tr>
-    <% history.each do |history| %>
-        <% j = JSON.parse(history, :symbolize_keys => true) %>
-        <tr class='<%= j["error"].nil? ? "" : "failure" %>' >
-          <td class='queue'><%= j[:class] %></td>
-          <td class='args'><%= j[:args] %></td>
-          <td class='args'><%= j[:time] %></td>
-          <td class='args'><%= format_execution(j[:execution]) %></td>
-        </tr>
-    <% end %>
+    <% history.each do |h| %>
+      <% j = JSON.parse(h).symbolize_keys %>
+    <tr class='<%= j[:error].nil? ? "" : "failure" %>' >
+      <td class='queue'><%= j[:class] %></td>
+      <td class='args'><%= j[:args] %></td>
+      <td class='args'><%= j[:time] %></td>
+      <td class='args'><%= format_execution(j[:execution]) %></td>
+    </tr>
+  <% end %>
   </table>
 
   <%= partial :next_more, :start => start, :size => size %>
 </div>
 
 <style type="text/css">
-    #main table tr.failure td {
-        background: #ffecec;
-        border-top: 2px solid #d37474;
-        font-size: 90%;
-        color: #d37474;
-    }
+#main table tr.failure td {
+  background: #ffecec;
+  border-top: 2px solid #d37474;
+  font-size: 90%;
+  color: #d37474;
+}
 
-    #main table tr.failure td a {
-        color: #d37474;
-    }
+#main table tr.failure td a {
+  color: #d37474;
+}
 </style>
