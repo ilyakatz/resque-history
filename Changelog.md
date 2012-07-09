@@ -1,5 +1,10 @@
 Changelog
 =========
+## 1.9.1 (July 9, 2012)
+
+Bug fixes
+
+  - merged pull request from @kevintom, https://github.com/ilyakatz/resque-history/pull/6
 
 ## 1.9.0 (May 9, 2012)
 
