@@ -69,11 +69,11 @@ describe Resque::Plugins::History do
       arr = Resque.redis.lrange(Resque::Plugins::History::HISTORY_SET_NAME, 0, -1)
 
       arr.count.should == 3
-      arr.should == [
-          {"class"=>"HistoryJob", "args"=>[11], "time"=>"2000-09-01 12:00", "execution"=>0},
-          {"class"=>"HistoryJob", "args"=>[12], "time"=>"2000-09-01 12:00", "execution"=>0},
-          {"class"=>"HistoryJob", "args"=>[13], "time"=>"2000-09-01 12:00", "execution"=>0}
-      ].collect(&:to_json)
+
+      JSON.parse(arr[0]).should == {"class"=>"HistoryJob", "args"=>[11], "time"=>"2000-09-01 12:00", "execution"=>0}
+      JSON.parse(arr[1]).should == {"class"=>"HistoryJob", "args"=>[12], "time"=>"2000-09-01 12:00", "execution"=>0}
+      JSON.parse(arr[2]).should == {"class"=>"HistoryJob", "args"=>[13], "time"=>"2000-09-01 12:00", "execution"=>0}
+
     end
 
   end
@@ -116,9 +116,7 @@ describe Resque::Plugins::History do
       arr = Resque.redis.lrange(Resque::Plugins::History::HISTORY_SET_NAME, 0, -1)
 
       arr.count.should == 1
-      arr.should == [
-          {"class"=>"SlowHistoryJob", "args"=>[10], "time"=>"2000-09-01 12:10", "execution"=>600}
-      ].collect(&:to_json)
+      JSON.parse(arr[0]).should == {"class"=>"SlowHistoryJob", "args"=>[10], "time"=>"2000-09-01 12:10", "execution"=>600}
 
     end
 
@@ -139,10 +137,9 @@ describe Resque::Plugins::History do
       arr = Resque.redis.lrange(Resque::Plugins::History::HISTORY_SET_NAME, 0, -1)
 
       arr.count.should == 2
-      arr.should == [
-          {"class"=>"SlowHistoryJob", "args"=>[5], "time"=>"2000-09-01 12:15", "execution"=>300},
-          {"class"=>"SlowHistoryJob", "args"=>[10], "time"=>"2000-09-01 12:10", "execution"=>600}
-      ].collect(&:to_json)
+
+      JSON.parse(arr[0]).should == {"class"=>"SlowHistoryJob", "args"=>[5], "time"=>"2000-09-01 12:15", "execution"=>300}
+      JSON.parse(arr[1]).should == {"class"=>"SlowHistoryJob", "args"=>[10], "time"=>"2000-09-01 12:10", "execution"=>600}
 
     end
 
