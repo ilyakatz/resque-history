@@ -22,8 +22,8 @@
       <th>Execution</th>
     </tr>
     <% history.each do |history| %>
-        <% j = JSON.parse(history, :symbolize_keys => true) %>
-        <tr class='<%= j["error"].nil? ? "" : "failure" %>' >
+        <% j = JSON.parse(history, :symbolize_names => true) %>
+        <tr class='<%= j[:error].nil? ? "" : "failure" %>' >
           <td class='queue'><%= j[:class] %></td>
           <td class='args'><%= j[:args] %></td>
           <td class='args'><%= j[:time] %></td>
