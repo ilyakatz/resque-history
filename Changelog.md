@@ -1,6 +1,12 @@
 Changelog
 =========
 
+## 1.9.1 (Jul 22, 2012)
+
+Bug fixes
+
+  - using symbolize keys instead of strings for hashes
+
 ## 1.9.0 (May 9, 2012)
 
 Features:
