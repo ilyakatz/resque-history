@@ -25,7 +25,7 @@
         <% j = JSON.parse(history, :symbolize_names => true) %>
         <tr class='<%= j[:error].nil? ? "" : "failure" %>' >
           <td class='queue'><%= j[:class] %></td>
-          <td class='args'><%= j[:args] %></td>
+          <td class='args'><%= j[:args] ? show_args(j[:args]) : '' %></td>
           <td class='args'><%= j[:time] %></td>
           <td class='args'><%= format_execution(j[:execution]) %></td>
         </tr>
