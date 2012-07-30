@@ -22,10 +22,10 @@
       <th>Execution</th>
     </tr>
     <% history.each do |history| %>
-        <% j = JSON.parse(history, :symbolize_names => true) %>
+      <% j = JSON.parse(history, :symbolize_names => true, :symbolize_keys => true) %>
         <tr class='<%= j[:error].nil? ? "" : "failure" %>' >
           <td class='queue'><%= j[:class] %></td>
-          <td class='args'><%= j[:args] %></td>
+          <td class='args'><pre><%= j[:args] ? show_args(j[:args]) : '' %></pre></td>
           <td class='args'><%= j[:time] %></td>
           <td class='args'><%= format_execution(j[:execution]) %></td>
         </tr>
