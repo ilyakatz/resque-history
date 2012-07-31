@@ -1,6 +1,13 @@
 Changelog
 =========
 
+## 1.9.3 (Jul 30, 2012)
+
+Bug fixes
+
+  - fix for yajl parser (@kevintom #10)
+  - formatting improvements to comply with resque (@kevintom #10)
+
 ## 1.9.1 (Jul 22, 2012)
 
 Bug fixes
