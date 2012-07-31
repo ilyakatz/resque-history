@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    resque-history (1.9.1)
+    resque-history (1.9.3)
       rake
       resque
       resque-history
