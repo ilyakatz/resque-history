@@ -23,7 +23,7 @@ module Resque
       end
 
 
-      def before_perform_hsitory(*args)
+      def before_perform_history(*args)
         @start_time = Time.now
       end
 
