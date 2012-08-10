@@ -46,6 +46,23 @@ but if you want to store less items, assign @max_history in the job class.
     end
 ```
 
+### 3rd Party classes
+
+If you want to use resque history with 3rd party resque jobs, 
+extended the classes that you want to be recorded in history
+
+```ruby
+[
+    CarrierWave::Workers::ProcessAsset,
+    CarrierWave::Workers::StoreAsset,
+    ActionMailer::DeliveryMethods
+].each do |klazz|
+  klazz.class_eval do
+    extend Resque::Plugins::History
+  end
+end
+```
+
 Resque-Web integration
 ----------------------
 
