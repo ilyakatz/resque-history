@@ -34,7 +34,7 @@ describe Resque::Plugins::History do
       arr = Resque.redis.lrange(Resque::Plugins::History::HISTORY_SET_NAME, 0, -1)
 
       arr.count.should == 1
-      JSON.parse(arr.first).should == {"class"=>"HistoryJob", "args"=>[12], "time"=>"2000-09-01 12:00", "execution"=>0}
+      JSON.parse(arr.first).should == {"class" => "HistoryJob", "args" => [12], "time" => "2000-09-01 12:00", "execution" => 0}
     end
   end
 
@@ -70,9 +70,9 @@ describe Resque::Plugins::History do
 
       arr.count.should == 3
 
-      JSON.parse(arr[0]).should == {"class"=>"HistoryJob", "args"=>[11], "time"=>"2000-09-01 12:00", "execution"=>0}
-      JSON.parse(arr[1]).should == {"class"=>"HistoryJob", "args"=>[12], "time"=>"2000-09-01 12:00", "execution"=>0}
-      JSON.parse(arr[2]).should == {"class"=>"HistoryJob", "args"=>[13], "time"=>"2000-09-01 12:00", "execution"=>0}
+      JSON.parse(arr[0]).should == {"class" => "HistoryJob", "args" => [11], "time" => "2000-09-01 12:00", "execution" => 0}
+      JSON.parse(arr[1]).should == {"class" => "HistoryJob", "args" => [12], "time" => "2000-09-01 12:00", "execution" => 0}
+      JSON.parse(arr[2]).should == {"class" => "HistoryJob", "args" => [13], "time" => "2000-09-01 12:00", "execution" => 0}
 
     end
 
@@ -116,7 +116,7 @@ describe Resque::Plugins::History do
       arr = Resque.redis.lrange(Resque::Plugins::History::HISTORY_SET_NAME, 0, -1)
 
       arr.count.should == 1
-      JSON.parse(arr[0]).should == {"class"=>"SlowHistoryJob", "args"=>[10], "time"=>"2000-09-01 12:10", "execution"=>600}
+      JSON.parse(arr[0]).should == {"class" => "SlowHistoryJob", "args" => [10], "time" => "2000-09-01 12:10", "execution" => 600}
 
     end
 
@@ -138,8 +138,8 @@ describe Resque::Plugins::History do
 
       arr.count.should == 2
 
-      JSON.parse(arr[0]).should == {"class"=>"SlowHistoryJob", "args"=>[5], "time"=>"2000-09-01 12:15", "execution"=>300}
-      JSON.parse(arr[1]).should == {"class"=>"SlowHistoryJob", "args"=>[10], "time"=>"2000-09-01 12:10", "execution"=>600}
+      JSON.parse(arr[0]).should == {"class" => "SlowHistoryJob", "args" => [5], "time" => "2000-09-01 12:15", "execution" => 300}
+      JSON.parse(arr[1]).should == {"class" => "SlowHistoryJob", "args" => [10], "time" => "2000-09-01 12:10", "execution" => 600}
 
     end
 
@@ -171,20 +171,30 @@ describe Resque::Plugins::History do
 
     it "should record failed jobs" do
 
-      Resque.enqueue(ExceptionJob,"nothing")
+      arr = Resque.redis.lrange(Resque::Plugins::History::HISTORY_SET_NAME, 0, -1)
+      arr.count.should == 0
 
-      job = Resque.reserve('test')
+      Resque.enqueue(ExceptionJob, "nothing")
 
-      lambda { job.perform }.should raise_exception
+      worker = Resque::Worker.new(:test)
+      worker.register_worker
+      worker.process
+
       arr = Resque.redis.lrange(Resque::Plugins::History::HISTORY_SET_NAME, 0, -1)
 
+      #there is currently a bug in resque
+      #that calls resque history twice
+      #https://github.com/defunkt/resque/issues/442
+      #rather than hacking it, i'd prefer to wait until that problem is fixed
 
-      arr.count.should == 1
+      arr.count.should == 2
 
       JSON.parse(arr.first)["class"].should =="ExceptionJob"
       JSON.parse(arr.first)["args"].should == ["nothing"]
       JSON.parse(arr.first)["execution"].should == nil
       JSON.parse(arr.first)["error"].should == "I'm an error"
+      Resque.info[:failed].should eq(1)
+
     end
 
   end

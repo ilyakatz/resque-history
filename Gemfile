@@ -8,5 +8,6 @@ gem "resque"
 
 group :test, :development do
   gem "timecop"
+  #gem "debugger"
 end
 
