@@ -1,23 +1,6 @@
 require 'spec_helper'
 require 'timecop'
 
-class HistoryJob
-  extend Resque::Plugins::History
-  @queue = :test
-
-  def self.perform(*args)
-  end
-end
-
-class MaxHistoryJob
-  extend Resque::Plugins::History
-  @queue = :test2
-  @max_history = 15
-
-  def self.perform(*args)
-  end
-end
-
 describe Resque::Plugins::History do
 
   it "should be compliance with Resqu::Plugin document" do
@@ -182,12 +165,7 @@ describe Resque::Plugins::History do
 
       arr = Resque.redis.lrange(Resque::Plugins::History::HISTORY_SET_NAME, 0, -1)
 
-      #there is currently a bug in resque
-      #that calls resque history twice
-      #https://github.com/defunkt/resque/issues/442
-      #rather than hacking it, i'd prefer to wait until that problem is fixed
-
-      arr.count.should == 2
+      arr.count.should == 1
 
       JSON.parse(arr.first)["class"].should =="ExceptionJob"
       JSON.parse(arr.first)["args"].should == ["nothing"]
@@ -227,3 +205,21 @@ class ExceptionJob
     raise StandardError, "I'm an error"
   end
 end
+
+class HistoryJob
+  extend Resque::Plugins::History
+  @queue = :test
+
+  def self.perform(*args)
+  end
+end
+
+class MaxHistoryJob
+  extend Resque::Plugins::History
+  @queue = :test2
+  @max_history = 15
+
+  def self.perform(*args)
+  end
+end
+

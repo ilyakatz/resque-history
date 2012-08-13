@@ -4,7 +4,7 @@ source "http://rubygems.org"
 gemspec
 
 gem "rake"
-gem "resque"
+gem "resque", ">=1.21.0"
 
 group :test, :development do
   gem "timecop"
