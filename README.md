@@ -1,4 +1,5 @@
-# Resque History [![alt build status][1]][2]
+# Resque History 
+[![alt build status][1]][2][![Dependency Status](https://gemnasium.com/diaspora/diaspora.png?travis)](https://gemnasium.com/diaspora/diaspora)
 
 [1]: https://secure.travis-ci.org/ilyakatz/resque-history.png?branch=master
 [2]: http://travis-ci.org/#!/ilyakatz/resque-history
