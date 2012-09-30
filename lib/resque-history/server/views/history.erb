@@ -25,9 +25,9 @@
       <% j = JSON.parse(history, :symbolize_names => true, :symbolize_keys => true) %>
         <tr class='<%= j[:error].nil? ? "" : "failure" %>' >
           <td class='queue'><%= j[:class] %></td>
-          <td class='args'><pre><%= j[:args] ? show_args(j[:args]) : '' %></pre></td>
-          <td class='args'><%= j[:time] %></td>
-          <td class='args'><%= format_execution(j[:execution]) %></td>
+          <td class='argument'><pre><%= j[:args] ? show_args(j[:args]) : '' %></pre></td>
+          <td class='time'><%= j[:time] %></td>
+          <td class='execution'><%= format_execution(j[:execution]) %></td>
         </tr>
     <% end %>
   </table>
@@ -41,6 +41,11 @@
         border-top: 2px solid #d37474;
         font-size: 90%;
         color: #d37474;
+    }
+
+        .argument {
+        max-width: 250px;
+        word-wrap: break-word;
     }
 
     #main table tr.failure td a {
