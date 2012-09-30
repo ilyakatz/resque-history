@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    resque-history (1.9.3)
+    resque-history (1.9.4)
       rake
       resque
       resque-history
@@ -97,7 +97,7 @@ PLATFORMS
 
 DEPENDENCIES
   bundler
-  jeweler (~> 1.6.4)
+  jeweler
   rake
   resque
   resque-history!
