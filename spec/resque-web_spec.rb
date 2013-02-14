@@ -41,6 +41,11 @@ describe ResqueHistory::Server do
     last_response.body.should_not include("HistoryJob")
   end
 
+  it "should not show full message if there is small number of jobs in the history" do
+    get '/history'
+    last_response.body.should =~ /Showing 0 to.*jobs/m
+  end
+
 end
 
 class HistoryJob
