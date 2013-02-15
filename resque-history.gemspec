@@ -63,9 +63,6 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<jeweler>, [">= 0"])
       s.add_development_dependency(%q<rspec-rails>, [">= 0"])
       s.add_development_dependency(%q<timecop>, [">= 0"])
-      s.add_development_dependency(%q<timecop>, [">= 0"])
-      s.add_development_dependency(%q<timecop>, [">= 0"])
-      s.add_development_dependency(%q<timecop>, [">= 0"])
     else
       s.add_dependency(%q<resque-history>, [">= 0"])
       s.add_dependency(%q<rake>, [">= 0"])
@@ -73,9 +70,6 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<bundler>, [">= 0"])
       s.add_dependency(%q<jeweler>, [">= 0"])
       s.add_dependency(%q<rspec-rails>, [">= 0"])
-      s.add_dependency(%q<timecop>, [">= 0"])
-      s.add_dependency(%q<timecop>, [">= 0"])
-      s.add_dependency(%q<timecop>, [">= 0"])
       s.add_dependency(%q<timecop>, [">= 0"])
     end
   else
@@ -85,9 +79,6 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<bundler>, [">= 0"])
     s.add_dependency(%q<jeweler>, [">= 0"])
     s.add_dependency(%q<rspec-rails>, [">= 0"])
-    s.add_dependency(%q<timecop>, [">= 0"])
-    s.add_dependency(%q<timecop>, [">= 0"])
-    s.add_dependency(%q<timecop>, [">= 0"])
     s.add_dependency(%q<timecop>, [">= 0"])
   end
 end
