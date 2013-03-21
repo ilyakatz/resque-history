@@ -6,7 +6,3 @@ gemspec
 gem "rake"
 gem "resque"
 
-group :test, :development do
-  gem "timecop"
-end
-
