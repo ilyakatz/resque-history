@@ -5,4 +5,3 @@ gemspec
 
 gem "rake"
 gem "resque"
-
