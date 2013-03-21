@@ -1,4 +1,4 @@
-<% size = Resque.redis.llen(Resque::Plugins::History::HISTORY_SET_NAME) %>
+<% size = resque_history_total_jobs %>
 <% start = params[:start].to_i %>
 <% history = Resque.redis.lrange(Resque::Plugins::History::HISTORY_SET_NAME, start, start + 20)%>
 
@@ -10,7 +10,13 @@
   </form>
 <% end %>
 
-<p class='intro'>Showing <%=start%> to <%= start + 20 %> of <b><%= size = Resque.redis.llen(Resque::Plugins::History::HISTORY_SET_NAME) %></b> jobs</p>
+<p class='intro'>Showing <%= start %> to
+  <% if size > 20 %>
+    <%= start + 20 %> of <b><%= size %></b>
+  <% else %>
+    <%= size %>
+  <% end %>jobs</p>
+
 <div id="main">
   <%= partial :next_more, :start => params[:start].to_i, :size => size %>
 
