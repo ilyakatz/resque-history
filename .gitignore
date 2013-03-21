@@ -48,3 +48,4 @@ pkg
 #*.rbc
 .idea/
 *.gem
+.rspec
