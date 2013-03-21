@@ -18,6 +18,10 @@ module Resque
         end
       end
 
+      def resque_history_total_jobs
+        Resque.redis.llen(Resque::Plugins::History::HISTORY_SET_NAME)
+      end
+
     end
   end
 
