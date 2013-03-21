@@ -1,10 +1,9 @@
 PATH
   remote: .
   specs:
-    resque-history (1.9.4)
+    resque-history (1.9.5)
       rake
       resque
-      resque-history
 
 GEM
   remote: http://rubygems.org/
