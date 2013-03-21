@@ -4,7 +4,6 @@ PATH
     resque-history (1.9.5)
       rake
       resque
-      resque-history
 
 GEM
   remote: http://rubygems.org/
