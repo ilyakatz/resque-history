@@ -1,5 +1,4 @@
 require 'rack/test'
-
 if !system("which redis-server")
   puts '', "** can't find `redis-server` in your path"
   abort ''
