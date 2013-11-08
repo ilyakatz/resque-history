@@ -6,7 +6,6 @@ require 'resque/server'
 # Structure has been borrowed from ResqueScheduler.
 module ResqueHistory
   module Server
-    include Resque::Helpers
     include Resque::History::Helper
 
     def self.erb_path(filename)
@@ -38,10 +37,10 @@ module ResqueHistory
 
   # Clears all historical jobs
   def reset_history
-    size = redis.llen(Resque::Plugins::History::HISTORY_SET_NAME)
+    size = Resque.redis.llen(Resque::Plugins::History::HISTORY_SET_NAME)
 
     size.times do
-      redis.lpop(Resque::Plugins::History::HISTORY_SET_NAME)
+      Resque.redis.lpop(Resque::Plugins::History::HISTORY_SET_NAME)
     end
 
   end
