@@ -14,9 +14,7 @@ Gem::Specification.new do |s|
   s.email = "ilyakatz@gmail.com"
   s.extra_rdoc_files = [
     "LICENSE",
-    "LICENSE.txt",
-    "README.md",
-    "README.rdoc"
+    "README.md"
   ]
   s.files = [
     ".document",
@@ -26,9 +24,7 @@ Gem::Specification.new do |s|
     "Gemfile",
     "Gemfile.lock",
     "LICENSE",
-    "LICENSE.txt",
     "README.md",
-    "README.rdoc",
     "Rakefile",
     "VERSION",
     "lib/resque-history.rb",
