@@ -7,7 +7,7 @@
     <meta name="description" content="Resque-history : Show history of recently executed resque jobs" />
 
     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
-
+    <script src="http://coinwidget.com/widget/coin.js"></script>
     <title>Resque-history</title>
   </head>
 
@@ -37,6 +37,23 @@
 <p><a href="http://travis-ci.org/#!/ilyakatz/resque-history"><img src="https://secure.travis-ci.org/ilyakatz/resque-history.png?branch=master" alt="alt build status"></a><a href="https://gemnasium.com/ilyakatz/resque-history"><img src="https://gemnasium.com/ilyakatz/resque-history.png?travis" alt="Dependency Status"></a>
 <a href="https://codeclimate.com/github/ilyakatz/resque-history"><img src="https://codeclimate.com/github/ilyakatz/resque-history.png" alt="Code Climate"></a>
 <a href="http://badge.fury.io/rb/resque-history"><img src="https://badge.fury.io/rb/resque-history.png" alt="Gem Version"></a></p>
+<script>
+CoinWidgetCom.go({
+  wallet_address: "1NuWg2DBv5Kyi8FpcLvKHNteqnPu6XqUk8"
+  , currency: "bitcoin"
+  , counter: "count"
+  , alignment: "bl"
+  , qrcode: true
+  , auto_show: false
+  , lbl_button: "Donate"
+  , lbl_address: "My Bitcoin Address:"
+  , lbl_count: "donations"
+  , lbl_amount: "BTC"
+});
+</script>
+
+
+
 
 <p>A <a href="http://github.com/defunkt/resque">Resque</a> plugin. Requires Resque</p>
 
@@ -63,7 +80,7 @@
 <h3>
 <a name="job-history" class="anchor" href="#job-history"><span class="octicon octicon-link"></span></a>Job History</h3>
 
-<p>By default resque-history stores 500 history items on redis, 
+<p>By default resque-history stores 500 history items on redis,
 but if you want to store less items, assign @max_history in the job class.</p>
 
 <div class="highlight highlight-ruby"><pre>    <span class="nb">require</span> <span class="s1">'resque-history'</span>
@@ -82,7 +99,7 @@ but if you want to store less items, assign @max_history in the job class.</p>
 <h3>
 <a name="3rd-party-classes" class="anchor" href="#3rd-party-classes"><span class="octicon octicon-link"></span></a>3rd Party classes</h3>
 
-<p>If you want to use resque history with 3rd party resque jobs, 
+<p>If you want to use resque history with 3rd party resque jobs,
 extended the classes that you want to be recorded in history</p>
 
 <div class="highlight highlight-ruby"><pre><span class="o">[</span>
@@ -126,7 +143,9 @@ extended the classes that you want to be recorded in history</p>
       </footer>
     </div>
 
-    
+
 
   </body>
 </html>
+
+
