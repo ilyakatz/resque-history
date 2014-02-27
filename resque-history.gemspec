@@ -5,18 +5,17 @@
 
 Gem::Specification.new do |s|
   s.name = "resque-history"
-  s.version = "1.10.0"
+  s.version = "1.11.0"
+  s.license = "MIT"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Katzmopolitan"]
-  s.date = "2013-03-24"
+  s.date = "2013-11-08"
   s.description = "Show history of recently executed jobs"
   s.email = "ilyakatz@gmail.com"
   s.extra_rdoc_files = [
     "LICENSE",
-    "LICENSE.txt",
-    "README.md",
-    "README.rdoc"
+    "README.md"
   ]
   s.files = [
     ".document",
@@ -26,12 +25,14 @@ Gem::Specification.new do |s|
     "Gemfile",
     "Gemfile.lock",
     "LICENSE",
-    "LICENSE.txt",
     "README.md",
-    "README.rdoc",
     "Rakefile",
     "VERSION",
     "lib/resque-history.rb",
+    "lib/resque-history/engine.rb",
+    "lib/resque-history/engine/app/controllers/resque_web/plugins/resque_history/histories_controller.rb",
+    "lib/resque-history/engine/app/views/resque_web/plugins/resque_history/histories/_next_more.html.erb",
+    "lib/resque-history/engine/app/views/resque_web/plugins/resque_history/histories/show.html.erb",
     "lib/resque-history/helpers/helper.rb",
     "lib/resque-history/plugins/history.rb",
     "lib/resque-history/server.rb",
@@ -49,7 +50,7 @@ Gem::Specification.new do |s|
   ]
   s.homepage = "https://github.com/ilyakatz/resque-history"
   s.require_paths = ["lib"]
-  s.rubygems_version = "1.8.25"
+  s.rubygems_version = "1.8.23"
   s.summary = "Show history of recently executed jobs"
 
   if s.respond_to? :specification_version then
@@ -61,6 +62,8 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<bundler>, [">= 0"])
       s.add_development_dependency(%q<jeweler>, [">= 0"])
       s.add_development_dependency(%q<rspec-rails>, [">= 0"])
+      s.add_development_dependency(%q<rspec>, ["> 2.12.0"])
+      s.add_development_dependency(%q<rack-test>, [">= 0"])
       s.add_development_dependency(%q<timecop>, [">= 0"])
     else
       s.add_dependency(%q<resque>, [">= 0"])
@@ -68,6 +71,8 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<bundler>, [">= 0"])
       s.add_dependency(%q<jeweler>, [">= 0"])
       s.add_dependency(%q<rspec-rails>, [">= 0"])
+      s.add_dependency(%q<rspec>, ["> 2.12.0"])
+      s.add_dependency(%q<rack-test>, [">= 0"])
       s.add_dependency(%q<timecop>, [">= 0"])
     end
   else
@@ -76,6 +81,8 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<bundler>, [">= 0"])
     s.add_dependency(%q<jeweler>, [">= 0"])
     s.add_dependency(%q<rspec-rails>, [">= 0"])
+    s.add_dependency(%q<rspec>, ["> 2.12.0"])
+    s.add_dependency(%q<rack-test>, [">= 0"])
     s.add_dependency(%q<timecop>, [">= 0"])
   end
 end

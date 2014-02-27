@@ -1,5 +1,7 @@
 # Resque History 
 [![alt build status][1]][2][![Dependency Status](https://gemnasium.com/ilyakatz/resque-history.png?travis)](https://gemnasium.com/ilyakatz/resque-history)
+[![Code Climate](https://codeclimate.com/github/ilyakatz/resque-history.png)](https://codeclimate.com/github/ilyakatz/resque-history)
+[![Gem Version](https://badge.fury.io/rb/resque-history.png)](http://badge.fury.io/rb/resque-history)
 
 [1]: https://secure.travis-ci.org/ilyakatz/resque-history.png?branch=master
 [2]: http://travis-ci.org/#!/ilyakatz/resque-history
