@@ -1,9 +1,10 @@
-# Resque History 
-[![alt build status][1]][2][![Dependency Status](https://gemnasium.com/ilyakatz/resque-history.png?travis)](https://gemnasium.com/ilyakatz/resque-history)
-[![Code Climate](https://codeclimate.com/github/ilyakatz/resque-history.png)](https://codeclimate.com/github/ilyakatz/resque-history)
-[![Gem Version](https://badge.fury.io/rb/resque-history.png)](http://badge.fury.io/rb/resque-history)
+# Resque History
+[![alt build status][1]][2]
+[![Dependency Status](http://img.shields.io/gemnasium/ilyakatz/he.svg)](https://gemnasium.com/ilyakatz/resque-history)
+[![Code Climate](http://img.shields.io/codeclimate/github/ilyakatz/resque-history.svg)](https://codeclimate.com/github/ilyakatz/resque-history)
+[![Gem Version](http://img.shields.io/gem/v/resque-history.svg)](http://badge.fury.io/rb/resque-history)
 
-[1]: https://secure.travis-ci.org/ilyakatz/resque-history.png?branch=master
+[1]: http://img.shields.io/travis/ilyakatz/resque-history.svg
 [2]: http://travis-ci.org/#!/ilyakatz/resque-history
 
 
@@ -32,7 +33,7 @@ Usage / Examples
 
 ### Job History
 
-By default resque-history stores 500 history items on redis, 
+By default resque-history stores 500 history items on redis,
 but if you want to store less items, assign @max_history in the job class.
 
 ```ruby
@@ -51,7 +52,7 @@ but if you want to store less items, assign @max_history in the job class.
 
 ### 3rd Party classes
 
-If you want to use resque history with 3rd party resque jobs, 
+If you want to use resque history with 3rd party resque jobs,
 extended the classes that you want to be recorded in history
 
 ```ruby
@@ -80,7 +81,7 @@ Install
 Add to your Gemfile
 
     $ gem "resque-history"
-    
+
 Add to routes.rb file
 
     require 'resque-history/server'
