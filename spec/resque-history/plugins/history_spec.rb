@@ -1,5 +1,6 @@
 require 'spec_helper'
 require 'timecop'
+require 'json'
 
 class HistoryJob
   extend Resque::Plugins::History

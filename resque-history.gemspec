@@ -5,12 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "resque-history"
-  s.version = "1.11.0"
-  s.license = "MIT"
+  s.version = "2.0.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Katzmopolitan"]
-  s.date = "2013-11-08"
+  s.date = "2014-04-02"
   s.description = "Show history of recently executed jobs"
   s.email = "ilyakatz@gmail.com"
   s.extra_rdoc_files = [
@@ -19,6 +18,7 @@ Gem::Specification.new do |s|
   ]
   s.files = [
     ".document",
+    ".ruby-version",
     ".rvmrc",
     ".travis.yml",
     "Changelog.md",
@@ -31,6 +31,7 @@ Gem::Specification.new do |s|
     "lib/resque-history.rb",
     "lib/resque-history/engine.rb",
     "lib/resque-history/engine/app/controllers/resque_web/plugins/resque_history/histories_controller.rb",
+    "lib/resque-history/engine/app/helpers/resque_web/plugins/resque_history/histories_helper.rb",
     "lib/resque-history/engine/app/views/resque_web/plugins/resque_history/histories/_next_more.html.erb",
     "lib/resque-history/engine/app/views/resque_web/plugins/resque_history/histories/show.html.erb",
     "lib/resque-history/helpers/helper.rb",

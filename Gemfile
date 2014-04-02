@@ -3,7 +3,10 @@ source "http://rubygems.org"
 # Specify your gem's dependencies in resque-history.gemspec
 # gemspec
 
-gem "resque"
+gem "resque", "~> 2.0.0.pre.1", github: "resque/resque"
+gem 'resque-web', require: 'resque_web'
+gem 'json'
+gem 'yajl-ruby'
 
 group :development, :test do
   gem "rake"
