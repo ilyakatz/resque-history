@@ -31,8 +31,8 @@ describe Resque::Plugins::History do
       job = Resque.reserve('test')
       job.perform
 
-      arr = Resque.redis.lrange(Resque::Plugins::History::HISTORY_SET_NAME, 0, -1)
 
+      arr = Resque.backend.store.lrange(Resque::Plugins::History::HISTORY_SET_NAME, 0, -1)
       arr.count.should == 1
       JSON.parse(arr.first).should == {"class"=>"HistoryJob", "args"=>[12], "time"=>"2000-09-01 12:00", "execution"=>0}
     end
