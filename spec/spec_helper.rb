@@ -51,7 +51,7 @@ RSpec.configure do |config|
   end
 
   config.before(:each) do
-    Resque.redis.flushall
+    Resque.backend.store.flushall
     Kernel.stub!(:sleep)
   end
 

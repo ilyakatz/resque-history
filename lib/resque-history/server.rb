@@ -1,5 +1,5 @@
 require 'resque'
-require 'resque/server'
+#require 'resque/server'
 #require 'resque-history'
 
 # Extends Resque Web Based UI.
@@ -32,7 +32,6 @@ module ResqueHistory
       end
     end
 
-    Resque::Server.tabs << 'History'
   end
 
   # Clears all historical jobs
