@@ -1,0 +1,60 @@
+<% size = resque_history_total_jobs %>
+<% start = params[:start].to_i %>
+<% history = Resque.redis.lrange(Resque::Plugins::History::HISTORY_SET_NAME, start, start + 20)%>
+
+<h1 class='wi'>Job history</h1>
+
+<% if size > 0 %>
+  <form method="POST" action="<%=u 'history/clear'%>" class='clear-delayed'>
+    <input type='submit' name='' value='Clear History' />
+  </form>
+<% end %>
+
+<p class='intro'>Showing <%= start %> to
+  <% if size > 20 %>
+    <%= start + 20 %> of <b><%= size %></b>
+  <% else %>
+    <%= size %>
+  <% end %>jobs</p>
+
+<div id="main">
+  <%= render partial: "next_more", locals: { :start => params[:start].to_i, :size => size } %>
+
+  <table>
+    <tr>
+      <th>Job</th>
+      <th>Arguments</th>
+      <th>Time</th>
+      <th>Execution</th>
+    </tr>
+    <% history.each do |history| %>
+      <% j = JSON.parse(history, :symbolize_names => true, :symbolize_keys => true) %>
+        <tr class='<%= j[:error].nil? ? "" : "failure" %>' >
+          <td class='queue'><%= j[:class] %></td>
+          <td class='argument'><pre><%= j[:args] ? show_args(j[:args]) : '' %></pre></td>
+          <td class='time'><%= j[:time] %></td>
+          <td class='execution'><%= format_execution(j[:execution]) %></td>
+        </tr>
+    <% end %>
+  </table>
+
+  <%= render partial: 'next_more', locals: { :start => start, :size => size } %>
+</div>
+
+<style type="text/css">
+    #main table tr.failure td {
+        background: #ffecec;
+        border-top: 2px solid #d37474;
+        font-size: 90%;
+        color: #d37474;
+    }
+
+        .argument {
+        max-width: 250px;
+        word-wrap: break-word;
+    }
+
+    #main table tr.failure td a {
+        color: #d37474;
+    }
+</style>

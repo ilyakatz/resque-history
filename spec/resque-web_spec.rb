@@ -10,9 +10,9 @@ describe ResqueHistory::Server do
   end
 
   let :queues do
-    Resque.redis.sadd(:queues, "queue1")
-    Resque.redis.sadd(:queues, "queue2")
-    Resque.redis.sadd(:queues, "queue3")
+    Resque.backend.store.sadd(:queues, "queue1")
+    Resque.backend.store.sadd(:queues, "queue2")
+    Resque.backend.store.sadd(:queues, "queue3")
   end
 
   before do

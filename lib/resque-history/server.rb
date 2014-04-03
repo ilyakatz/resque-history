@@ -1,6 +1,6 @@
 require 'resque'
-require 'resque/server'
-require 'resque-history'
+#require 'resque/server'
+#require 'resque-history'
 
 # Extends Resque Web Based UI.
 # Structure has been borrowed from ResqueScheduler.
@@ -32,7 +32,6 @@ module ResqueHistory
       end
     end
 
-    Resque::Server.tabs << 'History'
   end
 
   # Clears all historical jobs
@@ -47,6 +46,6 @@ module ResqueHistory
 end
 
 Resque.extend ResqueHistory
-Resque::Server.class_eval do
-  include ResqueHistory::Server
-end
+#Resque::Server.class_eval do
+#  include ResqueHistory::Server
+#end
