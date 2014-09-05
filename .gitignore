@@ -51,3 +51,4 @@ pkg
 .rspec
 
 .ruby-*
+.rbenv-*
