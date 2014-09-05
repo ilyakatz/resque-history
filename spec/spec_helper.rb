@@ -53,7 +53,6 @@ RSpec.configure do |config|
 
   config.before(:each) do
     Resque.redis.flushall
-    Kernel.stub!(:sleep)
   end
 
   config.after(:suite) do
