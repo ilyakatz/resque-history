@@ -45,8 +45,9 @@ RSpec.configure do |config|
     `redis-server #{File.dirname(File.expand_path(__FILE__))}/redis-test.conf`
     pid = ''
     while pid.empty? do
-      pid = `ps -e -o pid,command | grep [r]edis-test`.split(" ")[0]
+      pid = `cat #{File.dirname(File.expand_path(__FILE__))}/redis/redis-test.pid`
     end
+    puts "redis pid is #{pid}"
     Resque.redis = '127.0.0.1:9736'
   end
 
@@ -56,8 +57,8 @@ RSpec.configure do |config|
   end
 
   config.after(:suite) do
-    pid = `ps -e -o pid,command | grep [r]edis-test`.split(" ")[0]
-    puts '', "Killing test redis server..."
+    pid = `cat #{File.dirname(File.expand_path(__FILE__))}/redis/redis-test.pid`
+    puts '', "Killing test redis server (pid: #{pid})..."
     Process.kill("KILL", pid.to_i)
     `rm -f #{File.dirname(File.expand_path(__FILE__))}/dump.rdb`
   end
