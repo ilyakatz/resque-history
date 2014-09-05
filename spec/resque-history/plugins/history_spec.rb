@@ -42,14 +42,13 @@ describe Resque::Plugins::History do
     MaxHistoryJob.maximum_history_size.should == 15
   end
 
-
   it "should set the default size of the history list to be 500" do
     HistoryJob.maximum_history_size.should == 500
   end
 
   it "should truncate the maximum" do
 
-    HistoryJob.stub(:maximum_history_size).and_return { 3 }
+    expect(HistoryJob).to receive(:maximum_history_size).at_least(:once).and_return(3)
 
     Resque.enqueue(HistoryJob, 15)
     Resque.enqueue(HistoryJob, 13)
@@ -94,13 +93,11 @@ describe Resque::Plugins::History do
 
     Resque.reset_history
 
-
     arr = Resque.redis.lrange(Resque::Plugins::History::HISTORY_SET_NAME, 0, -1)
 
     arr.count.should == 0
 
   end
-
 
   describe "record execution time" do
 
@@ -157,11 +154,9 @@ describe Resque::Plugins::History do
 
       arr = Resque.redis.lrange(Resque::Plugins::History::HISTORY_SET_NAME, 0, -1)
 
-
       JSON.parse(arr.first)["class"].should =="SleepyHistoryJob"
       JSON.parse(arr.first)["args"].should ==[1]
       JSON.parse(arr.first)["execution"].should ==1
-
 
       JSON.parse(arr.last)["class"].should =="SleepyHistoryJob"
       JSON.parse(arr.last)["args"].should ==[3]
@@ -177,7 +172,6 @@ describe Resque::Plugins::History do
 
       lambda { job.perform }.should raise_exception
       arr = Resque.redis.lrange(Resque::Plugins::History::HISTORY_SET_NAME, 0, -1)
-
 
       arr.count.should == 1
 
