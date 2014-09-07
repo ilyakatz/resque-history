@@ -1,11 +1,11 @@
 # Resque History
-[![alt build status][1]][2][![Dependency Status](https://gemnasium.com/ilyakatz/resque-history.png?travis)](https://gemnasium.com/ilyakatz/resque-history)
-[![Code Climate](https://codeclimate.com/github/ilyakatz/resque-history.png)](https://codeclimate.com/github/ilyakatz/resque-history)
-[![Gem Version](https://badge.fury.io/rb/resque-history.png)](http://badge.fury.io/rb/resque-history)
+[![alt build status][1]][2]
+[![Dependency Status](http://img.shields.io/gemnasium/ilyakatz/he.svg)](https://gemnasium.com/ilyakatz/resque-history)
+[![Code Climate](http://img.shields.io/codeclimate/github/ilyakatz/resque-history.svg)](https://codeclimate.com/github/ilyakatz/resque-history)
+[![Gem Version](http://img.shields.io/gem/v/resque-history.svg)](http://badge.fury.io/rb/resque-history)
 
-[1]: https://secure.travis-ci.org/ilyakatz/resque-history.png?branch=master
+[1]: http://img.shields.io/travis/ilyakatz/resque-history.svg
 [2]: http://travis-ci.org/#!/ilyakatz/resque-history
-
 
 A [Resque][rq] plugin. Requires Resque
 
@@ -28,7 +28,6 @@ Usage / Examples
       end
     end
 ```
-
 
 ### Job History
 
@@ -72,7 +71,6 @@ Resque-Web integration
 'History' tab in resque web GUI
 
 ![Resque History GUI](https://img.skitch.com/20120510-x4egbeih39bb2xe82c2mtapmp9.jpg)
-
 
 Install
 =======

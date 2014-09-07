@@ -51,3 +51,8 @@ pkg
 .rspec
 
 .ruby-*
+.rbenv-*
+
+spec/redis/redis-test.pid
+spec/redis/stdout
+spec/redis/dump.rdb
