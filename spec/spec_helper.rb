@@ -57,7 +57,7 @@ RSpec.configure do |config|
 
   config.after(:suite) do
     pid = `cat #{File.dirname(File.expand_path(__FILE__))}/redis/redis-test.pid`
-    puts '', "Killing test redis server (pid: #{pid})..."
+    puts "Killing test redis server (pid: #{pid})..."
     Process.kill("KILL", pid.to_i)
     `rm -f #{File.dirname(File.expand_path(__FILE__))}/dump.rdb`
   end
