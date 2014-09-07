@@ -34,12 +34,12 @@ describe Resque::Plugins::History do
       arr = Resque.redis.lrange(Resque::Plugins::History::HISTORY_SET_NAME, 0, -1)
 
       arr.count.should == 1
-      JSON.parse(arr.first).should == {"class"=>"HistoryJob", "args"=>[12], "time"=>"2000-09-01 12:00", "execution"=>0}
+      expect(JSON.parse(arr.first)).to eq({"class"=>"HistoryJob", "args"=>[12], "time"=>"2000-09-01 12:00", "execution"=>0})
     end
   end
 
   it "should use the max_history size of the history list" do
-    MaxHistoryJob.maximum_history_size.should == 15
+    expect(MaxHistoryJob.maximum_history_size).to eq 15
   end
 
   it "should set the default size of the history list to be 500" do
