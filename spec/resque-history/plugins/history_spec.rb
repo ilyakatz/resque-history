@@ -34,7 +34,11 @@ describe Resque::Plugins::History do
       arr = Resque.redis.lrange(Resque::Plugins::History::HISTORY_SET_NAME, 0, -1)
 
       arr.count.should == 1
-      expect(JSON.parse(arr.first)).to eq({"class"=>"HistoryJob", "args"=>[12], "time"=>"2000-09-01 12:00", "execution"=>0})
+      expected = {
+        "class"=>"HistoryJob", "args"=>[12],
+        "time"=>"2000-09-01 12:00", "execution"=>0
+      }
+      expect(JSON.parse(arr.first)).to eq(expected)
     end
   end
 
