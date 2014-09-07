@@ -12,5 +12,5 @@ group :development, :test do
   gem "rspec-rails"
   gem "rspec", ">2.12.0"
   gem "rack-test"
-  gem "timecop"
+  gem "timecop", "0.6.1"
 end
