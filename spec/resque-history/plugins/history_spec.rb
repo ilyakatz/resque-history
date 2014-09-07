@@ -35,8 +35,8 @@ describe Resque::Plugins::History do
 
       arr.count.should == 1
       expected = {
-        "class"=>"HistoryJob", "args"=>[12],
-        "time"=>"2000-09-01 12:00", "execution"=>0
+        "class" => "HistoryJob", "args" => [12],
+        "time" => "2000-09-01 12:00", "execution" => 0
       }
       expect(JSON.parse(arr.first)).to eq(expected)
     end
