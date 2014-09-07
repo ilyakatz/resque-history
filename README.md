@@ -7,7 +7,6 @@
 [1]: http://img.shields.io/travis/ilyakatz/resque-history.svg
 [2]: http://travis-ci.org/#!/ilyakatz/resque-history
 
-
 A [Resque][rq] plugin. Requires Resque
 
 resque-history adds functionality record recently history of job executions
@@ -29,7 +28,6 @@ Usage / Examples
       end
     end
 ```
-
 
 ### Job History
 
@@ -73,7 +71,6 @@ Resque-Web integration
 'History' tab in resque web GUI
 
 ![Resque History GUI](https://img.skitch.com/20120510-x4egbeih39bb2xe82c2mtapmp9.jpg)
-
 
 Install
 =======
