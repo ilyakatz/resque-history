@@ -72,7 +72,7 @@ Resque-Web integration
 
 'History' tab in resque web GUI
 
-![Resque History GUI](https://img.skitch.com/20120510-x4egbeih39bb2xe82c2mtapmp9.jpg)
+![Resque History GUI](https://monosnap.com/file/0FNT1ZINLWlRS0in5JPxYVKjCa3v84.png)
 
 
 Install
