@@ -86,4 +86,4 @@ Add to routes.rb file
 
     require 'resque-history/server'
 
-[rq]: http://github.com/defunkt/resque
+[rq]: https://github.com/resque/resque
