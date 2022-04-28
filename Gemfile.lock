@@ -7,7 +7,8 @@ GEM
     diff-lcs (1.2.5)
     faraday (0.8.9)
       multipart-post (~> 1.2.0)
-    git (1.2.8)
+    git (1.11.0)
+      rchardet (~> 1.8)
     github_api (0.10.2)
       addressable
       faraday (~> 0.8.7)
@@ -44,6 +45,7 @@ GEM
     rack-test (0.6.2)
       rack (>= 1.0)
     rake (10.3.2)
+    rchardet (1.8.0)
     rdoc (4.1.1)
       json (~> 1.4)
     redis (3.0.3)
